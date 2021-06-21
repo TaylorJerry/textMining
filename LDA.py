@@ -5,9 +5,28 @@
 import pandas as pd
 #import os.chdir('..')
 
+# Read data into papers old solution
+#papers = pd.read_csv('cleaned.csv')# Print head
+#papers.head()
+
 # Read data into papers
-papers = pd.read_csv('cleaned.csv')# Print head
+import textract
+import io
+byte_text = textract.process('./Papers/Business Intelligence in Industry 4.0 State of the art and resea.pdf')
+
+raw_text = str(byte_text,'utf-8')
+raw_text = raw_text.replace(',', '')
+raw_text = raw_text.replace('"', '')
+raw_text = io.StringIO(raw_text)
+
+
+df=pd.read_csv(raw_text, header=None)
+df.info
+papers = df
 papers.head()
+papers['paper_text'] = papers[0]
+
+
 
 # Load the regular expression library
 import re
@@ -45,7 +64,7 @@ nltk.download('stopwords')
 from nltk.corpus import stopwords
 
 stop_words = stopwords.words('english')
-stop_words.extend(['from', 'subject', 're', 'edu', 'use'])
+stop_words.extend(['from', 'subject', 're', 'edu', 'use', 'et', 'al', 'ii', 'pp', 'et al', 'n'])
 
 def sent_to_words(sentences):
     for sentence in sentences:
@@ -104,7 +123,7 @@ import os
 #pyLDAvis.enable_notebook()
 #pyLDAvis.write_html("result.html")
 
-LDAvis_data_filepath = os.path.join('results/ldavis_prepared_'+str(num_topics))
+LDAvis_data_filepath = os.path.join('results/ldavis_prepared2_'+str(num_topics))
 
 # # this is a bit time consuming - make the if statement True
 # # if you want to execute visualization prep yourself
@@ -117,6 +136,6 @@ if 1 == 1:
 # load the pre-prepared pyLDAvis data from disk
 with open(LDAvis_data_filepath, 'rb') as f:
     LDAvis_prepared = pickle.load(f)
-    pyLDAvis.save_html(LDAvis_prepared, './results/ldavis_prepared_'+ str(num_topics) +'.html')
+    pyLDAvis.save_html(LDAvis_prepared, './results/ldavis_prepared2_'+ str(num_topics) +'.html')
     
 #LDAvis_prepared

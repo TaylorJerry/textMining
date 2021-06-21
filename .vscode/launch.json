@@ -5,10 +5,17 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Python: Current File",
+            "name": "LDA",
             "type": "python",
             "request": "launch",
-            "program": "${file}",
+            "program": "LDA.py",
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "PDF reader",
+            "type": "python",
+            "request": "launch",
+            "program": "readpdf.py",
             "console": "integratedTerminal"
         }
     ]
