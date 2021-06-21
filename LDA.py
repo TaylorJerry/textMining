@@ -12,20 +12,18 @@ import pandas as pd
 # Read data into papers
 import textract
 import io
+# read pdf into bytes
 byte_text = textract.process('./Papers/Business Intelligence in Industry 4.0 State of the art and resea.pdf')
 
+# convert bytes to string
 raw_text = str(byte_text,'utf-8')
 raw_text = raw_text.replace(',', '')
 raw_text = raw_text.replace('"', '')
 raw_text = io.StringIO(raw_text)
 
-
 df=pd.read_csv(raw_text, header=None)
-df.info
 papers = df
-papers.head()
 papers['paper_text'] = papers[0]
-
 
 
 # Load the regular expression library
