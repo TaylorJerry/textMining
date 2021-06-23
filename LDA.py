@@ -100,8 +100,6 @@ corpus = [id2word.doc2bow(text) for text in texts]
 
 # View
 print(corpus[:1][0][:30])
-print('----------Corpus---------')
-print(corpus)
 
 from pprint import pprint
 
