@@ -2,6 +2,7 @@
 # https://towardsdatascience.com/end-to-end-topic-modeling-in-python-latent-dirichlet-allocation-lda-35ce4ed6b3e0
 
 # Importing modules
+from numpy import append
 import pandas as pd
 #import os.chdir('..')
 
@@ -12,26 +13,29 @@ import pandas as pd
 # Read data into papers
 import textract
 import io
-# read pdf into bytes
-byte_text = textract.process('./Papers/Business Intelligence in Industry 4.0 State of the art and resea.pdf')
+import os
+data_all = os.listdir('./Papers')
+papers = pd.DataFrame()
 
-# convert bytes to string
-raw_text = str(byte_text,'utf-8')
-raw_text = raw_text.replace(',', '')
-raw_text = raw_text.replace('"', '')
-raw_text = io.StringIO(raw_text)
+for i in data_all:
+    path = f'./Papers/{i}'
+    byte_text = textract.process(path)
+    raw_text = str(byte_text,'utf-8')
+    raw_text = raw_text.replace(',', '')
+    raw_text = raw_text.replace('"', '')
+    raw_text = io.StringIO(raw_text)
+    df=pd.read_csv(raw_text, header=None)
+    papers = papers.append(df)
+    print(i)
 
-df=pd.read_csv(raw_text, header=None)
-papers = df
 papers['paper_text'] = papers[0]
-
 
 # Load the regular expression library
 import re
 
 # Remove punctuation
 papers['paper_text_processed'] = \
-papers['paper_text'].map(lambda x: re.sub('[,\.!?]', '', x))
+papers['paper_text'].map(lambda x: re.sub('[,\.!?]', '', str(x)))
 
 # Convert the titles to lowercase
 papers['paper_text_processed'] = \
@@ -58,7 +62,7 @@ wordcloud.to_file("wordcloud.png")
 import gensim
 from gensim.utils import simple_preprocess
 import nltk
-nltk.download('stopwords')
+#nltk.download('stopwords')
 from nltk.corpus import stopwords
 
 stop_words = stopwords.words('english')
@@ -96,7 +100,8 @@ corpus = [id2word.doc2bow(text) for text in texts]
 
 # View
 print(corpus[:1][0][:30])
-
+print('----------Corpus---------')
+print(corpus)
 
 from pprint import pprint
 
