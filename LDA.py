@@ -15,6 +15,7 @@ import textract
 import io
 import os
 data_all = os.listdir('./Papers')
+print("Number of papers: ", len(data_all))
 papers = pd.DataFrame()
 
 for i in data_all:
@@ -66,7 +67,9 @@ import nltk
 from nltk.corpus import stopwords
 
 stop_words = stopwords.words('english')
-stop_words.extend(['from', 'subject', 're', 'edu', 'use', 'et', 'al', 'ii', 'pp', 'et al', 'n'])
+stop_words.extend(['from', 'subject', 're', 'edu', 'use', 'et', 'al', 'ii', 'pp', 'et al', 'n'
+, 'wurttemberg', 'baden', 'hochschule', 'duale', 'downloaded', 'licensed', 'authorized', 'ieee', 
+'june', 'utc', 'limited' 'xplore', 'apply', 'restrictions', 'used'])
 
 def sent_to_words(sentences):
     for sentence in sentences:
@@ -104,7 +107,7 @@ print(corpus[:1][0][:30])
 from pprint import pprint
 
 # number of topics
-num_topics = 10
+num_topics = 5
 
 # Build LDA model
 lda_model = gensim.models.LdaMulticore(corpus=corpus,
