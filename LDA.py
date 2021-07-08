@@ -69,7 +69,8 @@ from nltk.corpus import stopwords
 stop_words = stopwords.words('english')
 stop_words.extend(['from', 'subject', 're', 'edu', 'use', 'et', 'al', 'ii', 'pp', 'et al', 'n'
 , 'wurttemberg', 'baden', 'hochschule', 'duale', 'downloaded', 'licensed', 'authorized', 'ieee', 
-'june', 'utc', 'limited' 'xplore', 'apply', 'restrictions', 'used'])
+'june', 'utc', 'limited' 'xplore', 'apply', 'restrictions', 'used', 'journal', 'also', 'paper', 'nan',
+ 'vol', 'eg', 'de'])
 
 def sent_to_words(sentences):
     for sentence in sentences:
@@ -107,7 +108,7 @@ print(corpus[:1][0][:30])
 from pprint import pprint
 
 # number of topics
-num_topics = 5
+num_topics = 4
 
 # Build LDA model
 lda_model = gensim.models.LdaMulticore(corpus=corpus,
