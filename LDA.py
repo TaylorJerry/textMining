@@ -70,7 +70,7 @@ stop_words = stopwords.words('english')
 stop_words.extend(['from', 'subject', 're', 'edu', 'use', 'et', 'al', 'ii', 'pp', 'et al', 'n'
 , 'wurttemberg', 'baden', 'hochschule', 'duale', 'downloaded', 'licensed', 'authorized', 'ieee', 
 'june', 'utc', 'limited' 'xplore', 'apply', 'restrictions', 'used', 'journal', 'also', 'paper', 'nan',
- 'vol', 'eg', 'de'])
+ 'vol', 'eg', 'de', 'conference', 'one'])
 
 def sent_to_words(sentences):
     for sentence in sentences:
