@@ -24,6 +24,8 @@ for i in data_all:
     raw_text = str(byte_text,'utf-8')
     raw_text = raw_text.replace(',', '')
     raw_text = raw_text.replace('"', '')
+    #raw_text = raw_text.replace('big data', 'bigdata')
+    
     raw_text = io.StringIO(raw_text)
     df=pd.read_csv(raw_text, header=None)
     papers = papers.append(df)
@@ -69,8 +71,8 @@ from nltk.corpus import stopwords
 stop_words = stopwords.words('english')
 stop_words.extend(['from', 'subject', 're', 'edu', 'use', 'et', 'al', 'ii', 'pp', 'et al', 'n'
 , 'wurttemberg', 'baden', 'hochschule', 'duale', 'downloaded', 'licensed', 'authorized', 'ieee', 
-'june', 'utc', 'limited' 'xplore', 'apply', 'restrictions', 'used', 'journal', 'also', 'paper', 'nan',
- 'vol', 'eg', 'de', 'conference', 'one'])
+'june', 'utc', 'xplore', 'apply', 'used', 'journal', 'also', 'paper', 'nan',
+ 'vol', 'eg', 'de', 'conference', 'one', 'page', 'well', 'fig', 'will', 'https','th', 'doiorg'])
 
 def sent_to_words(sentences):
     for sentence in sentences:
